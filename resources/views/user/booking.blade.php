@@ -49,39 +49,21 @@
             </nav>
             
             <ul class="validation">
-                <div>
-                    {{-- GUEST --}}
-                    @if (!Auth::check())
-                        {{-- <div class="validation"> --}}
-                        <span class="register">
-                            <a class="nav-link text-dark" id="register" href="{{ route('register') }}">Đăng ký</a>
-                        </span>
-
-                        <hr>
-                        <span class="login">
-                            <a class="nav-link text-dark" id="login" href="{{ route('login') }}">Đăng nhập</a>
-                        </span>
-                    @else
-                        {{-- USER --}}
-                        <div class="validation user">
-
-
-                            @auth
-                                <div class="nav-item" style="display:flex;">
-                                    <h3>
-                                        <span><a id="manage" class="nav-link text-dark" href="{{ route('user.info') }}"
-                                                title="Manage">Xin chào, {{ Auth::user()->cus_name }}</a></span>
-                                    </h3>
-
-                                    <form id="logoutForm" class="form-inline" action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button id="logout" type="submit"><i
-                                                class="fa-solid fa-right-from-bracket"></i></button>
-                                    </form>
-                                </div>
-                            @endauth
-                    @endif
-                </div>
+                @auth
+                <h3>
+                    <a id="manage" href="{{ route('user.info') }}" title="Manage">
+                        <span class="hello">Xin chào, {{ Auth::user()->cus_name }}</span>
+                    </a>
+                </h3>
+                    <li class="nav-item">
+                        <form id="logoutForm" class="form-inline" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </button>
+                        </form>
+                    </li>
+                    @endauth
             </ul>
 
             
@@ -179,7 +161,51 @@
                   </div>
                 </div>
               </div>
- 
+              <!--
+                <div class="date">
+                  <h4>NGÀY</h4>
+                  <div class="showtime-container">
+                    <label>
+                      <input type="radio" name="dates" checked="checked" />
+                      <span class="date">01/10</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="dates" />
+                      <span class="date">02/10</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="dates" />
+                      <span class="date">03/10</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="dates" />
+                      <span class="date">04/10</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="time">
+                  <h4>THỜI GIAN</h4>
+                  <div class="showtime-container">
+                  <label>
+                      <input type="radio" name="times" checked="checked" />
+                      <span class="date">10:30 AM</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="times" />
+                      <span class="date">01:00 PM</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="times" />
+                      <span class="date">03:00 PM</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="times" />
+                      <span class="date">05:00 PM</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              -->
 
 
             </div>

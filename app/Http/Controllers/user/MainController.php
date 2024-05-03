@@ -60,7 +60,18 @@ class MainController extends Controller
         ]);
     }
 
-
+    public function getbooking(Movie $movie){
+        //dd(Carbon::now('Asia/Ho_Chi_Minh'));
+        
+        return view('user.booking', [
+            'title' => 'Đặt vé',
+            'slots' => Slot::orderby('sl_start')
+                            ->where('mv_id', '=', $movie->mv_id)
+                            ->where('sl_start', '>=', Carbon::now('Asia/Ho_Chi_Minh'))
+                            ->paginate(20),
+            'movie' => $movie
+        ]);
+    }
     
 }
 

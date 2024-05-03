@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 
 class RoomService{
 
+
     public function getAll(){
         return Room::orderby('r_id')->paginate(20);
     }
@@ -63,6 +64,7 @@ class RoomService{
         
         return false;
     }
+
 
 }
 

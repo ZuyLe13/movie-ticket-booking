@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class TicketService{
 
+
     public function getAll(){
         return Ticket::orderby('tk_id')->paginate(20);
     }
@@ -15,6 +16,7 @@ class TicketService{
     public function getChosenTicket($billid){
         return Ticket::orderby('tk_id')->where('bi_id', '=', $billid)->paginate(20);
     }
+
 
 }
 
