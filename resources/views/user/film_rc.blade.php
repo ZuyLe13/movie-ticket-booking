@@ -1,4 +1,4 @@
- @extends ('user.main')
+@extends ('user.main')
 
 @section ('head')
     <link rel="stylesheet" href="/template/css/film.css">
