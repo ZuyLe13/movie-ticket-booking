@@ -11,7 +11,6 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    //
     public function getwelcome(){
 
         return view('welcome',[
@@ -24,7 +23,8 @@ class HomeController extends Controller
             ->paginate(8)
         ]);
     }
-    
+
+
     public function index(){
         if (Auth::id()){
             $cus_role=Auth()->user()->cus_role;
@@ -49,9 +49,5 @@ class HomeController extends Controller
                 return redirect()->back(); 
             }
         }
-    }
-    public function test()
-    {
-        return view("test");
     }
 }
