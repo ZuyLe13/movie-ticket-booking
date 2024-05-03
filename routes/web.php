@@ -26,8 +26,9 @@ use App\Http\Controllers\admin\TypeController;
 use App\Http\Controllers\admin\UploadController;
 
 Route::get('/', [HomeController::class, 'getwelcome']);
-// Route::get('/', [HomeController::class,'index'])->name('home');
+
 route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
 Route::get('/about_us', [App\Http\Controllers\user\MainController::class, 'getAboutUs']);
 Route::get('/rule', [App\Http\Controllers\user\MainController::class, 'getRule']);
 Route::get('/contact', [App\Http\Controllers\user\MainController::class, 'getContact']);
