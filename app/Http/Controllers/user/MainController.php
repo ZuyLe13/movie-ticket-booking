@@ -201,8 +201,56 @@ class MainController extends Controller
                                    ->with('count', $count);
     }
 
+    public function getbooking(Movie $movie){
+        //dd(Carbon::now('Asia/Ho_Chi_Minh'));
+        
+        return view('user.booking', [
+            'title' => 'Đặt vé',
+            'slots' => Slot::orderby('sl_start')
+                            ->where('mv_id', '=', $movie->mv_id)
+                            ->where('sl_start', '>=', Carbon::now('Asia/Ho_Chi_Minh'))
+                            ->paginate(20),
+            'movie' => $movie
+        ]);
+    }
 
-    
+        public function getInfo(){
+
+        $user = User::where('cus_name', '=', Auth::user()->cus_name)->first();
+        $email = $user->email;
+        $bills = Bill::where('email','=',$email)->orderBy('Bills.bi_date', 'desc')->get();
+        $tickets = Ticket::join('Bills','Bills.bi_id','=','Tickets.bi_id')
+                                ->join('Movies','Movies.mv_id','=','Tickets.mv_id')
+                                ->where('Bills.email', '=', $email)
+                                ->orderBy('Bills.bi_date', 'desc')
+                                ->get();
+        return view('user.info', [
+            'title' => 'Thông tin cá nhân',
+            'user' => $user,
+            'bills' => $bills,
+            'tickets' => $tickets
+        ]);
+    }
+
+    public function postInfo(Request $request){
+
+        $user = User::where('email','=', (String) $request->input('email'))->first();
+
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required|regex:/(0)[0-9]{9}/',
+            'birth' => 'required|date|before:today',
+            'gender' => 'required'
+        ]);
+
+        $user->cus_name = (String) $request->input('name');
+        $user->cus_dob = $request->input('birth');
+        $user->cus_phone = (String) $request->input('phone');
+        $user->cus_gender = (String) $request->input('gender');
+        $user->save();
+
+         return redirect('/user/info');
+    }
 }
 
 ?>

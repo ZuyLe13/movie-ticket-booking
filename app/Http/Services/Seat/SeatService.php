@@ -55,7 +55,6 @@ class SeatService{
         
         return false;
     }
-
 }
 
 ?>
